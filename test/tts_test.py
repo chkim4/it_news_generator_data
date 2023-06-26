@@ -1,7 +1,7 @@
 """
-TTS Test
+TTS 테스트
 
-ref: https://goodsgoods.tistory.com/328
+참고: https://goodsgoods.tistory.com/328
 """
 
 from gtts import gTTS

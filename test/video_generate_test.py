@@ -1,7 +1,7 @@
 """
-TTS + image -> video (mp4)
+TTS + 이미지 -> 영상 (mp4)
 
-ref: https://medium.com/@kamaljp/text-to-video-pipeline-python-automation-using-open-ai-models-f4341555c8d9
+참고: https://medium.com/@kamaljp/text-to-video-pipeline-python-automation-using-open-ai-models-f4341555c8d9
 """
 
 # pip install mutagen

@@ -1,7 +1,7 @@
 """
-Connection Test to Oracle DB
+오라클 DB 연결 테스트
 
-ref: https://almost-native.tistory.com/418 
+참고: https://almost-native.tistory.com/418 
 """
 import oracledb
 

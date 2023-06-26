@@ -1,6 +1,6 @@
 """
-Crawl for one news 
-site: Naver news, zdnet korea
+뉴스 기사 1개 크롤링
+사이트: Naver news, zdnet korea
 """
 
 from bs4 import BeautifulSoup

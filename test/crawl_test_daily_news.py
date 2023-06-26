@@ -1,7 +1,7 @@
 """
-Crawl for a one-day news 
-site: Naver news
-category: IT general (IT 일반)
+하루 뉴스 크롤링
+사이트: Naver news
+카테고리: IT 일반
 """
 
 from bs4 import BeautifulSoup

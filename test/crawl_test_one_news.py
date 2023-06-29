@@ -25,8 +25,5 @@ soup=BeautifulSoup(browser.page_source, "html.parser")
 
 div = soup.find_all('div', {'id': 'dic_area'})
 
-for child in div:
-    print('--------------------')
-    print(child.get_text())
-    print('--------------------')
+print(div[0].get_text().strip())
 

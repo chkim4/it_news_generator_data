@@ -1,0 +1,1 @@
+# it_news_generator_data

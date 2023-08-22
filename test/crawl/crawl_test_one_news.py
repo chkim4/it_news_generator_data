@@ -1,5 +1,5 @@
 """
-뉴스 기사 1개 크롤링
+뉴스 기사 1개 크롤링 \n
 사이트: Naver news, zdnet korea
 """
 

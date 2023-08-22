@@ -1,5 +1,7 @@
 """
-검증용 데이터 중 500건 추출
+검증용 데이터 중 100건 추출 \n
+데이터셋 출처: https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=realm&dataSetSn=97 \n
+(뉴스 기사 데이터만 사용)
 """
 import json
 from pathlib import Path
@@ -8,7 +10,7 @@ original_data = {}
 edited_data = {'documents': []}
 
 base_path = Path(__file__).parent
-file_path = (base_path / '../dataset/document_summary/news_valid_original.json').resolve()
+file_path = (base_path / './dataset/document_summary/news_valid_original.json').resolve()
 
 # 원래 데이터셋 불러오기
 with open(file_path, 'r', encoding='UTF-8') as f:
@@ -18,7 +20,11 @@ full_text_list = []
 extractive_list = []
 abstractive_list = []
 
-# 500건 저장
+# n: 추출할 데이터 수 / file_name: 저장할 파일명
+n = 100
+file_name = 'edited_valid_100.json'
+
+# 저장 형태
 # edited_data = {
 #    documents: [
 #       {   (기사1)
@@ -35,7 +41,7 @@ abstractive_list = []
 # }
 
 # range 안의 값을 통해 생성할 데이터 수 결정
-for i in range(500):
+for i in range(n):
     _json = {'text': '', 'extractive': '', 'abstractive': ''}
     text_list = []
     
@@ -73,6 +79,9 @@ for i in range(500):
     edited_data['documents'].append(_json)
 
 # 생성한 json 파일을 컴퓨터에 저장
-file_path = (base_path / '../dataset/document_summary/edited_valid_500.json').resolve()
-with open(file_path, "w") as json_file:
+
+file_path = '../dataset/document_summary/' + file_name
+full_file_path = (base_path / file_path).resolve()
+
+with open(full_file_path, "w") as json_file:
     json.dump(edited_data, json_file, ensure_ascii=False)

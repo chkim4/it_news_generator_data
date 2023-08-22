@@ -12,22 +12,19 @@ from pathlib import Path
 from moviepy import editor
 import os 
 
-#Pre requisites
-get_path ='C:/develop/toy/it_news_generator/test'
+get_path ='local path'
 audio_path = "myFirstMP3.mp3"
 video_path = "myFirstVideo.mp4"
-folder_path = 'C:/develop/toy/it_news_generator/test'
+folder_path = 'local path'
 full_audio_path = os.path.join(get_path,audio_path)
 full_video_path = os.path.join(get_path,video_path)
 
-# Reading in the mp3 that we got from gTTS
-
+# gTTS로 만든 mp3파일 읽어오기
 song = MP3(full_audio_path)
 audio_length = round(song.info.length)
 audio_length
 
-# Globbing the images and Stitching it to for the gif
-
+# 영상에 쓰일 이미지 첨부
 path_images = Path(folder_path)
 
 images = list(path_images.glob('*.jpg'))
@@ -38,21 +35,22 @@ for image_name in images:
     image = Image.open(image_name).resize((800, 800), Image.ANTIALIAS)
     image_list.append(image)
     
-#Checking Audio length
+
+#음성 길이 체크
 
 length_audio = audio_length
 duration = int(length_audio / len(image_list)) * 1000
 print(duration)
 
-#Creating Gif
+#Gif 생성
 
 image_list[0].save(os.path.join(folder_path,"temp.gif"),
                    save_all=True,
                    append_images=image_list[1:],
                    duration=duration)
 
-# Creating the video using the gif and the audio file
 
+# Gif + mp3 => 영상 생성
 video = editor.VideoFileClip(os.path.join(folder_path,"temp.gif"))
 print('done video')
 
@@ -65,5 +63,3 @@ print('Set Audio and writing')
 final_video.set_fps(60)
 
 final_video.write_videofile(full_video_path)
-
-# The final mp4 file in the folder

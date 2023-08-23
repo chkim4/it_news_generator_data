@@ -13,7 +13,7 @@ model = BartForConditionalGeneration.from_pretrained("ainize/kobart-news")
 
 def kobart_summary(content: str) -> str: 
     """
-    kobart-news 모델로 문서 요약 \n\n
+    kobart-news 모델로 문서 요약 \n
     매개변수: \n
     content -- 요약에 사용할 원문 기사 (String) \n
 
@@ -22,10 +22,9 @@ def kobart_summary(content: str) -> str:
     반환: \n
     result -- content를 생성 요약 1문장으로 요약한 결과 (String) \n
     """
-    # Encode Input Text
+
     input_ids = tokenizer.encode(content, return_tensors="pt")
 
-    # Generate Summary Text Ids
     summary_text_ids = model.generate(
         input_ids=input_ids,
         bos_token_id=model.config.bos_token_id,
@@ -36,5 +35,4 @@ def kobart_summary(content: str) -> str:
         num_beams=4,
     )
 
-    # Decoding Text
     return tokenizer.decode(summary_text_ids[0], skip_special_tokens=True)

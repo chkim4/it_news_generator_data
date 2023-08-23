@@ -11,10 +11,14 @@ con = oracledb.connect(user="scott", password="tiger", dsn="localhost:1521/xe")
 cursor = con.cursor()
  
 # Select 
-cursor.execute("select * from dept where deptno=10")
-out_data = cursor.fetchone()
-print("=====>", out_data[0])
-print("=====>", out_data[1])
-print("=====>", out_data[2])
- 
+# cursor.execute("select * from dept where deptno=10")
+# out_data = cursor.fetchone()
+# print("=====>", out_data[0])
+# print("=====>", out_data[1])
+# print("=====>", out_data[2])
+
+# InsertMany
+# cursor.executemany
+
+
 con.close()

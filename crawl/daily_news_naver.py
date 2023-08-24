@@ -7,6 +7,7 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import re
+from common._global import convert_crawl_to_dict
 
 def crawl_daily_news_naver() -> list: 
     """
@@ -25,14 +26,18 @@ def crawl_daily_news_naver() -> list:
     soup=get_soup(url, browser)
     
     # page: 크롤링할 페이지
-    # nums: 230823 현재 - 크롤링한 기사 개수 확인용으로 사용. 기사 순번으로 사용 가능할 것으로 예상
+    # order: 오늘 뉴스 내 각 기사의 순번
     # max_page: 1페이지 화면에서 가장 큰 페이지 번호
     # is_next_set_exists: '다음' 버튼 존재 여부
     page = 1
-    nums = 0 
+    order = 1
     max_page, is_next_set_exists = get_max_page(soup.find('div', 'paging'))
+    result = []
     
-    while page <= max_page: 
+     
+    # 테스트를 위해 1쪽만 스크랩하는 것으로 바꿈.
+    # 테스트 후 'while page <= max_page:' 로 바꾸기
+    while page <= 1:  
 
         # 현재 페이지 크롤링 
         uls = soup.find_all('ul', {"class": re.compile('^type06')})
@@ -41,11 +46,18 @@ def crawl_daily_news_naver() -> list:
             lis = ul.find_all('li')
             
             for li in lis: 
+                full_text = "" # 기사 내 본문 
                 a = li.select_one('dl > dt > a')
-                browser.get(a['href'])
+                href = a['href']
+                browser.get(href)
                 child_soup = BeautifulSoup(browser.page_source, "html.parser")
-                div = child_soup.find_all('article',{'id': 'dic_area'})
-                nums+=1
+                article = child_soup.find_all('article',{'id': 'dic_area'})
+                
+                for paragraph in article:
+                    full_text += paragraph.text
+                
+                result.append(convert_crawl_to_dict(full_text, href, order))
+                order+=1
                 
         # 다음 페이지 호출
         page += 1
@@ -73,7 +85,7 @@ def crawl_daily_news_naver() -> list:
         else:
             break
 
-    return [page, max_page, nums]
+    return result
 
 
 def get_max_page(pages) -> list:

@@ -15,12 +15,12 @@ def kobart_summary(content: str) -> str:
     """
     kobart-news 모델로 문서 요약 \n\n
     매개변수: \n
-    content -- 요약에 사용할 원문 기사 (String) \n
+    content -- 요약에 사용할 원문 기사 (str) \n
 
     \n
     
     반환: \n
-    result -- content를 생성 요약 1문장으로 요약한 결과 (String) \n
+    result -- content를 생성 요약 1문장으로 요약한 결과 (str) \n
     """
     # Encode Input Text
     input_ids = tokenizer.encode(content, return_tensors="pt")

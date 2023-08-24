@@ -17,12 +17,12 @@ def clova_summary(content: str) -> str:
     clova의 문서 요약 기능 호출. \n
 
     매개변수: \n
-    content -- 요약에 사용할 원문 기사 (String) \n
+    content -- 요약에 사용할 원문 기사 (str) \n
 
     \n   
 
     반환: \n
-    result -- content를 추출 요약 3문장으로 요약한 결과 (String)
+    result -- content를 추출 요약 3문장으로 요약한 결과 (str)
     """
 
     # 요청에 필요한 url, 헤더, 데이터 

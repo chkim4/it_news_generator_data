@@ -17,7 +17,7 @@ def crawl_one_news_naver(url: str) -> str:
     반환: \n
     result -- 기사 본문을 크롤링한 결과 (str) \n
     """
-    
+
     browser=webdriver.Chrome()
     browser.get(url)
     soup=BeautifulSoup(browser.page_source, "html.parser")

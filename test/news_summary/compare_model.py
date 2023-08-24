@@ -33,8 +33,8 @@ def get_similarity(text1: str, text2: str) -> float:
     text1과 text2의 문장 유사도 반환 \n
 
     매개변수: \n
-    text1 -- 비교할 문장1 (String) \n
-    text1 -- 비교할 문장2 (String) \n
+    text1 -- 비교할 문장1 (str) \n
+    text1 -- 비교할 문장2 (str) \n
     
     \n
 

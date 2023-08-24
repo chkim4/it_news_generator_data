@@ -20,7 +20,7 @@ def chatgpt_summary(content: str) -> str:
     \n
 
     반환: \n
-    result -- content를 생성 요약 1문장으로 요약한 결과 (String)
+    result -- content를 생성 요약 1문장으로 요약한 결과 (str)
     """
     
     content_prefix = "Summarize the following article in 1 setences in Korean: "

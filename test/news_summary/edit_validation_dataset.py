@@ -28,14 +28,14 @@ file_name = 'edited_valid_100.json'
 # edited_data = {
 #    documents: [
 #       {   (기사1)
-#           text: (신문 기사, string),
-#           extractive: (추출 요약, string),
-#           abstractive: (생성 요약, string)
+#           text: (신문 기사, str),
+#           extractive: (추출 요약, str),
+#           abstractive: (생성 요약, str)
 #        }, 
 #        {   (기사2)
-#           text: (신문 기사, string),
-#           extractive: (추출 요약, string),
-#           abstractive: (생성 요약, string)
+#           text: (신문 기사, str),
+#           extractive: (추출 요약, str),
+#           abstractive: (생성 요약, str)
 #        }
 #   ]
 # }

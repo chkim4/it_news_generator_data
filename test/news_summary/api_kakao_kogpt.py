@@ -17,14 +17,14 @@ def kogpt_summary(content: str, max_tokens = 1800, temperature = 0.1, top_p = 0.
     kogpt의 문서 생성 요약 기능 호출. \n
 
     매개변수: \n
-    content -- 요약에 사용할 원문 기사 (String) \n
+    content -- 요약에 사용할 원문 기사 (str) \n
     나머지 -- kogpt에서 요청하는 값. 자세한 건 api 문서 참고. 값은 문장 요약하면서 가장 나은 값으로 설정 \n
     https://developers.kakao.com/docs/latest/ko/kogpt/rest-api#sample-text-summary
     
     \n
     
     반환: \n
-    result -- content를 생성 요약 1문장으로 생성 요약한 결과 (String) \n
+    result -- content를 생성 요약 1문장으로 생성 요약한 결과 (str) \n
     """
     prompt = content + '\n 한줄 요약:' 
     

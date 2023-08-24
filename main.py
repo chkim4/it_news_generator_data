@@ -1,36 +1,50 @@
 """
 뉴스 영상 생성 및 기사 크롤링 실행
 """
-from crawl.one_news_naver import crawl_one_news_naver
+from crawl.test import test
 from model.kobart import kobart_summary
+import datetime
+import os
+import dotenv
+import oracledb
 
+dotenv.load_dotenv()
+DB_ID = os.environ.get("DB_ID")
+DB_PASS = os.environ.get("DB_PASS")
+DB_DSL = os.environ.get("DB_DSL")
+
+
+from common._global import SITE_NAVER_IT_GENERAL
 
 def generate_daily_news_naver():
     """
     오늘 네이버 IT 일반 뉴스 전체 페이지 크롤링 -> 기사 요약 -> DB 저장 \n
-
-    아이디어 \n
-    1. DB에 삽입할 데이터를 가공하기 위한 [{}] 형태의 데이터 생성 (articles_dict) \n  
-    2. 크롤링하면서 각 dict에 데이터 추가 {full_text: 기사 본문, source: 기사 URL, order: 순번} \n
-    3. 각 dict 내 'full_text'를 요약하여 'summary' 속성 추가 \n
-    4. site, date 속성 일괄 추가 \n
-    4. DB 저장을 위해 dict -> tuple로 변경 후 저장
-
     """
 
-    # {full_text, source, order} 생성   
-    # article_dict_list = crawl_daily_news_naver()
+    # {full_text, url, ord} 생성 (크롤링을 통해서만 얻을 수 있으므로 별도 실행)
+    # 230824 현재 테스트를 위해 한 개의 기사를 대상으로 함. 수정 요망
+    article_dict_list = test('https://n.news.naver.com/mnews/article/032/0003244768?sid=105')
+    articles = []
 
-    # for article in article_dict_list:
-    #     article['summary'] = kobart_summary(article['full_text']) 
-    #     print("----------------------------")
-    #     print("source: " , article['source'])
-    #     print("order: " , article['order'])
-    #     print("summary: " , article['summary'])
+    # articles ( list(tuple) ) 생성
+    for article in article_dict_list:
+        summary = kobart_summary(article['full_text'])
+        created_at = datetime.datetime.now()
 
-    print(kobart_summary(crawl_one_news_naver("https://n.news.naver.com/mnews/article/092/0002302952?sid=105")))
+        articles.append((summary, article["url"], article["ord"], 
+                        SITE_NAVER_IT_GENERAL, created_at)) 
+        
+    # articles를 DB에 삽입
+    oracledb.init_oracle_client()
+    con = oracledb.connect(user= DB_ID, password= DB_PASS, dsn=DB_DSL)
+    cursor = con.cursor()
 
+    cursor.executemany("""INSERT INTO ARTICLE (article_id, summary, url, ord, site, created_at) 
+                        VALUES (ARTICLE_SEQ.NEXTVAL, :1, :2, :3, :4, :5)""", articles)
     
+    con.commit()
+    con.close()
+
 generate_daily_news_naver()
 
 

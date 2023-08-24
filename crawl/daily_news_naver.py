@@ -16,7 +16,7 @@ def crawl_daily_news_naver() -> list:
     \n
     
     반환: \n
-    result -- 230823 현재 기준: [크롤링할 페이지의 최종값, 마지막 페이지, 마지막 순번]이지만, 교체 예정 \n
+    result -- 'common._global.convert_crawl_to_dict'에서 정의한 자료 구조로 반환 
     """
 
     browser=webdriver.Chrome()
@@ -26,11 +26,11 @@ def crawl_daily_news_naver() -> list:
     soup=get_soup(url, browser)
     
     # page: 크롤링할 페이지
-    # order: 오늘 뉴스 내 각 기사의 순번
+    # ord: 오늘 뉴스 내 각 기사의 순번
     # max_page: 1페이지 화면에서 가장 큰 페이지 번호
     # is_next_set_exists: '다음' 버튼 존재 여부
     page = 1
-    order = 1
+    ord = 1
     max_page, is_next_set_exists = get_max_page(soup.find('div', 'paging'))
     result = []
     
@@ -56,8 +56,8 @@ def crawl_daily_news_naver() -> list:
                 for paragraph in article:
                     full_text += paragraph.text
                 
-                result.append(convert_crawl_to_dict(full_text, href, order))
-                order+=1
+                result.append(convert_crawl_to_dict(full_text, href, ord))
+                ord+=1
                 
         # 다음 페이지 호출
         page += 1
@@ -146,7 +146,3 @@ def get_soup(url: str, browser):
 
     browser.get(url)
     return BeautifulSoup(browser.page_source, "html.parser")
-
-
-result = crawl_daily_news_naver()
-print(result)

@@ -49,18 +49,27 @@ def crawl_daily_news_naver() -> list:
                 
         # 다음 페이지 호출
         page += 1
-    
+
+        # 다음 페이지 크롤링
+        # 230824 현재 (요청 페이지 > 전체 페이지) 일 경우 가장 마지막 페이지로 연결
+        #   - ex. 요청 페이지: ...&page=100, 전체 페이지: 11 => 11페이지로 연결
+        #   - 그러므로 if 문 전에 아래 코드를 사용해도 무방함.  
+        #      url = default_url + str(page)
+        #      soup = get_soup(url, browser)
+        # 하지만 추후 네이버 뉴스 페이지 수정을 고려하여 그렇게 처리하지 않음. 
         if page <= max_page: 
             url = default_url + str(page)
             soup = get_soup(url, browser)
             continue
         
         # (page > max_page) && (is_next_set_exists)
+        # max_page 갱신
         elif is_next_set_exists:
             url = default_url + str(page)
             soup = get_soup(url, browser)
             max_page, is_next_set_exists = get_max_page(soup.find('div', 'paging'))
         
+        # 크롤링 완료
         else:
             break
 

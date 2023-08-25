@@ -7,9 +7,9 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 import re
-from common._global import get_max_page
-from common._global import get_soup
-from common._global import convert_crawl_to_dict
+from common._crawl import get_max_page
+from common._crawl import get_soup
+from common._crawl import convert_crawl_to_dict
 
 PAGE_LIMIT = 5
 

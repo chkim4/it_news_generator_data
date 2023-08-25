@@ -31,7 +31,7 @@ def kobart_summary(content: str) -> str:
         bos_token_id=model.config.bos_token_id,
         eos_token_id=model.config.eos_token_id,
         length_penalty=2.0,
-        max_length=142,
+        max_length=1000,
         min_length=56,
         num_beams=4,
     )

@@ -4,14 +4,18 @@
 
 from moviepy import editor
 import os
+import pathlib
 
 from common._global import get_video_full_path
 from common._generation import ONE_TTSS_PATH, ONE_IMGS_PATH, ONE_VIDEOS_PATH
 
-def generate_final_video() -> None:
+def generate_final_video() -> str:
     """
     ONE_VIDEOS_PATH 폴더 내 모든 영상을 이어 최종 영상 생성 \n
-    저장 경로: _global.get_video_full_path()의 반환 값
+    저장 경로: _global.get_video_full_path()의 반환 값 \n 
+
+    반환: \n
+    video_path -- 생성된 영상이 저장된 상대 경로 (get_video_full_path()) (str)
     """
 
     entries = os.scandir(ONE_VIDEOS_PATH)
@@ -25,7 +29,18 @@ def generate_final_video() -> None:
             video.reader.close()
     
     final_video = editor.concatenate_videoclips(videos)
-    final_video.write_videofile(get_video_full_path())
+    
+    video_path = get_video_full_path()
+
+    # 최종 영상 경로에 있던 이전 영상 제거
+    entries = os.scandir(pathlib.Path(video_path).parent)
+    for entry in entries:
+        os.remove(entry)
+
+    # 생성한 영상 저장
+    final_video.write_videofile(video_path)
+    return video_path
+
 
 def delete_tmp_files():
     """

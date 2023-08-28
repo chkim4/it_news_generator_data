@@ -11,16 +11,23 @@ import os
 
 from common._generation import ONE_TTS_PATH, ONE_IMG_PATH, ONE_VIDEO_PATH
 from common._generation import IMG_EXTENDER, TTS_EXTENDER, VIDEO_EXTENDER
+from generation.one_img import generate_one_img
+from generation.one_tts import generate_one_tts
 
-def generate_one_video(ord: int) -> None:
+def generate_one_video(content: str, ord: int) -> None:
     """
     영상 생성 후 common._generation.ONE_VIDEO_PATH에 저장 \n
     
     매개변수: \n
+    content -- 읽을 글자 (str) \n
     ord -- 순번 (int) \n
     """
 
     str_ord = str(ord) 
+
+    generate_one_tts(content, ord)
+    generate_one_img(content, ord)
+
 
     audio_path = os.path.join(ONE_TTS_PATH + str_ord + TTS_EXTENDER)
     img_path_str = ONE_IMG_PATH + str_ord  + IMG_EXTENDER

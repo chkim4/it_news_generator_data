@@ -2,7 +2,7 @@
 generation 폴더에서 주로 사용할 것으로 예상하는 공통 함수, 전역 변수 등 \n
 """
 
-ONE_DEFAULT_PATH = "generation/tmp/"
+ONE_DEFAULT_PATH = "generation/temporary/"
 """
 한 개 기사에 대한 TTS, 이미지, 영상을 저장하는 공통 경로 \n
 _generation.py 내에서 사용하기 위해 정의함
@@ -45,7 +45,7 @@ ONE_VIDEOS_PATH = ONE_DEFAULT_PATH + "video/"
 ONE_VIDEO_PATH에 있는 영상들을 연결할 때 사용
 """
 
-TTS_EXTENDER = ".mp3"
+TTS_EXTENDER = ".wav"
 """
 TTS 파일에 사용하는 확장자
 """

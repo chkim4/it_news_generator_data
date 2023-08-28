@@ -1,3 +1,6 @@
+"""
+기사 요약문을 읽는 TTS 생성 \n
+"""
 from gtts import gTTS
 from common._generation import ONE_TTS_PATH, TTS_EXTENDER
 

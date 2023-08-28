@@ -1,3 +1,7 @@
+"""
+기사 요약문이 적힌 이미지 생성 \n
+"""
+
 from PIL import Image, ImageDraw, ImageFont
 from common._generation import ONE_IMG_PATH, IMG_EXTENDER
 

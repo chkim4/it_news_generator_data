@@ -1,3 +1,11 @@
+"""
+TTS + 이미지 => 동영상 생성 \n
+
+TTS와 이미지는 특정 순번으로 각 하나씩만 선택 \n
+
+ex. 순번(ord) = 1 -> tts_1.mp3와 img_1.jpg의 조합으로 동영상 생성
+"""
+
 from moviepy import editor
 import os 
 
@@ -12,7 +20,7 @@ def generate_one_video(ord: int) -> None:
     ord -- 순번 (int) \n
     """
 
-    str_ord = str(ord)
+    str_ord = str(ord) 
 
     audio_path = os.path.join(ONE_TTS_PATH + str_ord + TTS_EXTENDER)
     img_path_str = ONE_IMG_PATH + str_ord  + IMG_EXTENDER

@@ -1,5 +1,5 @@
 /geckodriver.log
 .env
 dataset/
-generation/tmp/
+generation/temporary/
 video/

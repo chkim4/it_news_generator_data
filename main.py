@@ -3,14 +3,13 @@
 """
 
 from model.kobart import kobart_summary
-import datetime
 import os
 import dotenv
 import oracledb
-from pathlib import Path
+from pathlib import PurePath
 
 # 직접 제작
-from common._global import SITE_NAVER_IT_GENERAL, get_video_full_path
+from common._global import SITE_NAVER_IT_GENERAL, VIDEO_LOCATION_PREFIX
 from crawl.some_daily_news_naver import crawl_some_daily_news_naver
 from generation.one_video import generate_one_video
 from generation.final_video import *
@@ -44,10 +43,7 @@ def generate_daily_news_naver():
     
     print("summary is done")
 
-    base_path = Path(__file__).parent
-    relative_path = "./" + generate_final_video()
-    video_path = (base_path / relative_path).resolve()
-
+    video_path =  VIDEO_LOCATION_PREFIX + PurePath(generate_final_video()).name
     delete_tmp_files()
 
     # articles를 DB에 삽입
@@ -59,15 +55,9 @@ def generate_daily_news_naver():
                         VALUES (ARTICLE_SEQ.NEXTVAL, :1, :2, :3, :4)""", articles)
     
     cursor.execute("""INSERT INTO VIDEO (video_id, location) 
-                        VALUES (VIDEO_SEQ.NEXTVAL, :1)""", [str(video_path)])
+                        VALUES (VIDEO_SEQ.NEXTVAL, :1)""", [video_path])
      
     con.commit()
     con.close()
 
 generate_daily_news_naver()
-
-
-
-
-
-

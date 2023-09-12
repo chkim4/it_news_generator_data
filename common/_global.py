@@ -11,6 +11,12 @@ SITE_NAVER_IT_GENERAL = "naver-it-general"
 Article 테이블 내 site 칼럼에서 사용
 """
 
+VIDEO_LOCATION_PREFIX = "/video/"
+"""
+Video 테이블의 location 칼럼에 저장할 경로의 앞부분 \n
+ex. '/video/170113.mp4' => /video/ 에 해당
+"""
+
 def get_video_full_path() -> str:
     """
     최종 생성된 영상의 저장 경로 (파일명 포함) \n

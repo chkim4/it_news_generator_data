@@ -11,7 +11,7 @@ from common._crawl import get_max_page
 from common._crawl import get_soup
 from common._crawl import convert_crawl_to_dict
 
-PAGE_LIMIT = 5
+PAGE_LIMIT = 1
 
 def crawl_some_daily_news_naver() -> list: 
     """

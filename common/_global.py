@@ -13,7 +13,9 @@ Article 테이블 내 site 칼럼에서 사용
 
 VIDEO_LOCATION_PREFIX = "/video/"
 """
-Video 테이블의 location 칼럼에 저장할 경로의 앞부분 \n
+Video 테이블의 location 칼럼에 저장할 경로 \n
+Spring의 JSP 파일 내 <video>의 src 속성에 부여하는 값 중 파일명 제외 \n
+
 ex. '/video/170113.mp4' => /video/ 에 해당
 """
 
